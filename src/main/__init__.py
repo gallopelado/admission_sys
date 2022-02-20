@@ -9,11 +9,19 @@ app.config['APPLICATION_PROPERTIES'] = os.path.join(os.path.abspath(os.getcwd())
 # Modulos de referenciales
 from src.main.rutas.referenciales.ciudad.ciudad_routes import ciudadMod
 
+# Modulos de seguridad
+from src.main.rutas.seguridad.login.login_routes import loginMod
+
 # Raiz
 api = "/apiv1"
+
 # Registrar modulos de referenciales
 modulo0 = f"{api}/referenciales"
 app.register_blueprint(ciudadMod, url_prefix=f"{modulo0}/ciudad")
+
+# Registrar modulos de seguridad
+modulo0 = f"{api}/seguridad"
+app.register_blueprint(loginMod, url_prefix=f"{modulo0}/login")
 
 @app.route('/')
 def method_name():

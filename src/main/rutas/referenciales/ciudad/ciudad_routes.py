@@ -21,8 +21,8 @@ def addCiudad():
     json = request.get_json()
     resp = cdao.agregar(json['ciu_descripcion'])
     if resp==True:
-        return jsonify("{'estado':'correcto', 'mensaje':'Se ha agregado'}"), 200
-    return jsonify("{'estado':'error', 'mensaje':'No se ha agregado'}")
+        return jsonify("{'estado':'correcto', 'mensaje':'Se ha agregado'}"), 201
+    return jsonify("{'estado':'error', 'mensaje':'No se ha agregado'}"), 500
 
 @ciudadMod.route("/modify_ciudad", methods=["PUT"])
 def modifyCiudad():
