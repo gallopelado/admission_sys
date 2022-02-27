@@ -42,6 +42,7 @@ class LoginDao:
             conexion.con.commit()
             cursor.close()
             conexion.con.close()
+            usuario.operacion = "INSERTADO"
             return True
         except conexion.con.Error as e:
             print(e.pgerror)
@@ -55,6 +56,7 @@ class LoginDao:
             conexion.con.commit()
             cursor.close()
             conexion.con.close()
+            usuario.operacion = "ACTUALIZADO"
             return True
         except conexion.con.Error as e:
             return e.pgerror
@@ -67,6 +69,36 @@ class LoginDao:
             conexion.con.commit()
             cursor.close()
             conexion.con.close()
+            usuario.operacion = "ELIMINADO"
+            return True
+        except conexion.con.Error as e:
+            return e.pgerror
+
+    def getUserAndPassword(self, user, password):
+        conexion = ConexionDb()
+        usuario = {}
+        try:
+            cursor = conexion.con.cursor()
+            cursor.execute("SELECT usu_codigo_usuario, usu_password, usu_nombres, usu_apellidos, usu_descripcion, usu_estado, usu_rol FROM usuarios WHERE usu_estado='t' AND usu_codigo_usuario=%s AND usu_password=%s", (user, password,))
+            item = cursor.fetchone()
+            if item:
+                usuario = Logindto(item[0], item[1], item[2], item[3], item[4], item[5], item[6])
+            cursor.close()
+            conexion.con.close()
+        except conexion.con.Error as e:
+            print(e.pgerror)
+        return usuario
+
+    def modificarPassword(self, usuario):
+        try:
+            conexion = ConexionDb()
+            cursor = conexion.con.cursor()
+            cursor.execute("UPDATE public.usuarios SET usu_password=%s, usu_modificacion_usuario=%s, usu_modificacion_fecha=%s, usu_modificacion_hora=%s WHERE usu_codigo_usuario = %s", 
+            (usuario.usuPassword, usuario.usuModificacion_usuario, usuario.usuModificacion_fecha, usuario.usuModificacion_hora, usuario.usuCodigoUsuario,))
+            conexion.con.commit()
+            cursor.close()
+            conexion.con.close()
+            usuario.operacion = "CLAVE ACTUALIZADA"
             return True
         except conexion.con.Error as e:
             return e.pgerror

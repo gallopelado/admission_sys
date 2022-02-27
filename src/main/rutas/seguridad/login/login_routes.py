@@ -8,6 +8,8 @@ from src.main.models.seguridad.login.entidades.Login_schema import Login_schema
 # Modularizar
 loginMod = Blueprint("loginMod", __name__)
 logindao = LoginDao()
+fecha_actual_server = date.today()
+hora_actual_server = datetime.now().strftime("%H:%M:%S")
 
 @loginMod.route("/get_usuarios")
 def getUsuarios():
@@ -64,3 +66,15 @@ def deleteUsuario(codigousuario):
     if resp==True:
         return jsonify("{'estado':'correcto', 'mensaje':'Se ha eliminado'}"), 200
     return jsonify("{'estado':'error', 'mensaje':'No se ha eliminado'}")
+
+@loginMod.route("/check_user_password", methods=["POST"])
+def checkUserAndPassword():
+    json = request.get_json()
+    ## Trabajar el password a sha256
+    password = json['password']
+    ##passwordHashed = sha256(password.encode('utf8')).hexdigest()
+    usuario = logindao.getUserAndPassword(json['codigo_usuario'], password)
+    schema = Login_schema()
+    if usuario:
+        return jsonify(schema.dump(usuario)), 200
+    return jsonify("{'estado':'error', 'mensaje':'No se ha encontrado el usuario'}"), 404
