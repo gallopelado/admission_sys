@@ -1,0 +1,3 @@
+CREATE SEQUENCE public.asignacionseq
+INCREMENT 1
+START 1;
