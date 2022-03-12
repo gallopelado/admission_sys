@@ -1,8 +1,8 @@
 class PacienteAsignacionDto:
-    def __init__(self, pacasiCodigoEstablecimiento, pacasiCodigoAsignacion, pacCodigoPaciente, pacConsultaFecha, medId, 
-    suplMedId, pacasiCodigoConsultorio, pacasiHoraConsulta, pacasiNumeroOrdenEspera, pacasiEstado, segId,
-    pacasiCreacion_usuario, pacasiCreacion_fecha, pacasiCreacion_hora, 
-    pacasiModificacionUsuario, pacasiModificacionFecha, pacasiModificacionHora, operacion):
+    def __init__(self, pacasiCodigoEstablecimiento=None, pacasiCodigoAsignacion=None, pacCodigoPaciente=None, pacConsultaFecha=None, medId=None, 
+    suplMedId=None, pacasiCodigoConsultorio=None, pacasiHoraConsulta=None, pacasiNumeroOrdenEspera=None, pacasiEstado=None, segId=None,
+    pacasiCreacion_usuario=None, pacasiCreacion_fecha=None, pacasiCreacion_hora=None, 
+    pacasiModificacionUsuario=None, pacasiModificacionFecha=None, pacasiModificacionHora=None, operacion=None):
         self.pacasiCodigoEstablecimiento = pacasiCodigoEstablecimiento
         self.pacasiCodigoAsignacion = pacasiCodigoAsignacion
         self.pacCodigoPaciente = pacCodigoPaciente

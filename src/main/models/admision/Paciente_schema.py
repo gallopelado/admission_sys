@@ -12,7 +12,7 @@ class Paciente_Schema(Schema):
     ciuId = fields.Int()
     pacCorreoElectronico = fields.Str()
     nacId = fields.Int()
-    pacTelefono = fields.Int()
+    pacTelefono = fields.Str()
     pacDireccion = fields.Str()
     segId = fields.Int()
     pacHijos = fields.Int()

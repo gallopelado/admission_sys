@@ -23,5 +23,3 @@ class ConexionDb:
         port = properties['port']
         password = properties['password']
         self.con = psycopg2.connect(f"dbname={dbname} user={user} host={host} password={password} port={port}")
-
-        ## self.con = psycopg2.connect(f"dbname={dbname} user={user} host={host} password={password} port={port}")
