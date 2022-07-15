@@ -1,5 +1,5 @@
 # AdmissionApp - Backend para Aplicación móvil para la gestión de admisión
-## Proyecto de Quinto año de Ingeniería en Informática para Sistemas Corporativos II
+## Proyecto de Quinto/Sexto año de Ingeniería en Informática para Sistemas Corporativos II/Lenguaje científico I
 
 ## Modelado con
 * [StarUML](http://staruml.io/) - La herramienta de modelado.
@@ -15,7 +15,5 @@
 
 ## Autores
 * **Juan González**
-* **Oscar González**
-* **Ruben Ortiz**
 
 ### UTIC - 2022
