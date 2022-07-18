@@ -15,6 +15,9 @@ from src.main.rutas.seguridad.login.login_routes import loginMod
 #Modulos de admision
 from src.main.rutas.admision.admision_routes import admisionMod
 
+#Modulos de preconsulta
+from src.main.rutas.preconsulta.preconsulta_routes import preconsultaMod
+
 # Raiz
 api = "/apiv1"
 
@@ -29,6 +32,10 @@ app.register_blueprint(loginMod, url_prefix=f"{modulo1}/login")
 # Registrar modulos de admision
 modulo2 = f"{api}/admision"
 app.register_blueprint(admisionMod, url_prefix=f"{modulo2}")
+
+# Registrar modulos de admision
+modulo3 = f"{api}/preconsulta"
+app.register_blueprint(preconsultaMod, url_prefix=f"{modulo3}")
 
 @app.route('/')
 def method_name():
