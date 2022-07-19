@@ -29,19 +29,18 @@ class PreconsultaDao:
             app.logger.info("get preconsulta")
             return {
                 'precon_codigo_establecimiento': item[0]
-                , 'precon_codigo_establecimiento': item[1]
-                , 'pacasi_codigo_asignacion': item[2]
-                , 'precon_creacion_fecha': item[3]
-                , 'precon_temperatura_corporal': item[4]
-                , 'precon_presion_arterial': item[5]
-                , 'precon_frecuencia_respiratoria': item[6]
-                , 'precon_pulso': item[7]
-                , 'precon_peso': item[8]
-                , 'precon_talla': item[9]
-                , 'precon_imc': item[10]
-                , 'precon_saturacion': item[11]
-                , 'precon_circunferencia_abdominal': item[12]
-                , 'precon_motivo_consulta': item[13]
+                , 'pacasi_codigo_asignacion': item[1]
+                , 'precon_creacion_fecha': item[2]
+                , 'precon_temperatura_corporal': item[3]
+                , 'precon_presion_arterial': item[4]
+                , 'precon_frecuencia_respiratoria': item[5]
+                , 'precon_pulso': item[6]
+                , 'precon_peso': item[7]
+                , 'precon_talla': item[8]
+                , 'precon_imc': item[9]
+                , 'precon_saturacion': item[10]
+                , 'precon_circunferencia_abdominal': item[11]
+                , 'precon_motivo_consulta': item[12]
             }
         except conexion.con.Error as e:
             app.logger.error("preconsulta: - " + e.pgerror)

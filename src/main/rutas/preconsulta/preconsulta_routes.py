@@ -1,4 +1,3 @@
-from crypt import methods
 from flask import Blueprint, jsonify, request
 from src.main.models.preconsulta.Preconsultadao import PreconsultaDao
 from src.main.models.preconsulta.Preconsultadto import PreconsultaDto
