@@ -1,10 +1,37 @@
 import os
-from flask import Flask
+from flask import Flask, request, jsonify
+import jwt
+from functools import wraps
 
 app = Flask(__name__)
 
 # Definimos rutas estáticas
 app.config['APPLICATION_PROPERTIES'] = os.path.join(os.path.abspath(os.getcwd()), 'src/resources/application.properties.yaml')
+
+# Trabajar el JWT
+app.config['SECRET_KEY'] = 'miclavesecreta'
+
+def token_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        token = None
+        
+        if 'x-access-token' in request.headers:
+            token = request.headers['x-access-token']
+            
+        if not token:
+            return jsonify({'message' : 'Token is missing!'}), 401
+        
+        try:
+            data = jwt.decode(token, app.config['SECRET_KEY'], algorithms=["HS256"])
+            from src.main.models.seguridad.login.dao.LoginDao import LoginDao
+            u = LoginDao()
+            ## traer el usuario y su rol para validar privilegios, luego retornarlo en la funcion f(current_user, *args, **kwargs)
+            current_user = u.getUsuarioByCodigoUsuario(data['codigo_usuario'])
+        except:
+            return jsonify({'message' : 'Token is invalid!'}), 401
+        return f(current_user, *args, **kwargs)
+    return decorated
 
 # Modulos de referenciales
 from src.main.rutas.referenciales.ciudad.ciudad_routes import ciudadMod
