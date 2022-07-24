@@ -183,3 +183,4 @@ cython_debug/
 application.properties.yaml
 start.sh
 start.cmd
+start.prod.sh
