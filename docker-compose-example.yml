@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  sysapp:
+    container_name: sysapp
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000/tcp"
+    volumes:
+      - .:/workdir
+    networks:
+      - apps
+      - postgres
+    environment:
+      - TZ=America/Asuncion
+    restart: always
+  postgres:
+    container_name: postgres12.5
+    image: postgres:12.5-alpine
+    ports:
+      - "5487:5432/tcp"
+    networks:
+      - postgres
+    volumes:
+      - dbvolume:/var/lib/postgresql/data/pgdata
+    environment:
+      - TZ=America/Asuncion
+      - PGTZ=America/Asuncion
+      - POSTGRES_USER=
+      - POSTGRES_PASSWORD=
+      - POSTGRES_DB=
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    restart: always
+
+networks:
+  apps:
+    name: sysapp_apps
+    driver: bridge
+  postgres:
+    name: sysapp_postgres
+    driver: bridge
+
+volumes:
+  dbvolume:
