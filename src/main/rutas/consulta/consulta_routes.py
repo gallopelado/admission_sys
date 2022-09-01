@@ -39,3 +39,22 @@ def updatePreconsultaProcedimientosData():
         return jsonify({'estado':'correcto', 'mensaje':'Se ha realizado'}), 200
     else:
         return jsonify({'estado':'error', 'mensaje':'No se ha realizado'}), 500
+    
+@consultaMod.route("/update_consulta_procedimientos_detalle", methods=['PUT'])
+def updatePreconsultaProcedimientosDetalle():
+    lista_procedimientos = []
+    json = request.get_json()
+    # recolectar los datos de la petición
+    ## Consulta
+    consulta = ConsultaDto(json['con_codigo_establecimiento'], json['pacasi_codigo_asignacion'], json['con_creacion_fecha']
+                 , json['con_motivo_consulta'], json['con_historial_actual'], json['con_evolucion'], json['con_creacion_usuario'])
+    ## Consulta - procedimientos
+    req_procedimientos = json['lista_procedimientos']
+    if len(req_procedimientos)>0:
+        for item in req_procedimientos:
+            lista_procedimientos.append(ConsultaProcedimientosDto(item['pacasi_codigo_asignacion'], item['con_codigo_establecimiento'], item['con_creacion_fecha'], item['cie_id']))
+    consulta.lista_procedimientos = lista_procedimientos
+    consdao.updateConsultaProcedimientoDetalle(consulta)
+    if consulta.con_codigo_establecimiento:
+        return jsonify({'estado':'correcto', 'mensaje':'Se ha realizado la actualizacion en consulta'}), 200
+    return jsonify({'estado':'error', 'mensaje':'No se ha realizado'}), 500
